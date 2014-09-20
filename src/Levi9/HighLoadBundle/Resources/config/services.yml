@@ -3,5 +3,5 @@ parameters:
 
 services:
     levi9_high_load.student:
-        class: Levi9\HighLoadBundle\Service\StudentSerice
+        class: Levi9\HighLoadBundle\Service\StudentService
         #arguments: []
