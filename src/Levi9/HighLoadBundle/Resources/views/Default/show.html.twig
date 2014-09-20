@@ -3,6 +3,7 @@
 {% block title %}Student details{% endblock %}
 
 {% block body %}
-    Hello {{ name }}!
-    {{ "now"|date('Y-m-d H:i:s') }}
+    <h1>{{ student.name }}</h1>
+    <p>{{ student.description }}</p>
+    <p>{{ "now"|date('Y-m-d H:i:s') }}</p>
 {% endblock %}

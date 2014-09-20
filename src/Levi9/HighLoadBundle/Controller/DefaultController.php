@@ -9,11 +9,19 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
 class DefaultController extends Controller
 {
     /**
-     * @Route("/show/{name}", name="")
+     * @Route("/show/{path}", name="")
      * @Cache(expires="15 minutes", public=true)
      */
-    public function showAction($name)
+    public function showAction($path)
     {
-        return $this->render('Levi9HighLoadBundle:Default:show.html.twig', array('name' => $name));
+        $student = $this->get('doctrine')->getRepository('Levi9HighLoadBundle:Student')->findOneBy(
+            array(
+                'path' => $path
+            )
+        );
+        if (null === $student) {
+            throw $this->createNotFoundException();
+        }
+        return $this->render('Levi9HighLoadBundle:Default:show.html.twig', array('student' => $student));
     }
 }
