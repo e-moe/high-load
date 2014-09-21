@@ -19,9 +19,16 @@ class StudentCommand extends ContainerAwareCommand
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
+        $startTime = microtime(true);
         /** @var StudentService $studentService */
         $studentService = $this->getContainer()->get('levi9_high_load.student');
         $studentService->generatePath();
-        $output->writeln('done');
+        $timeElapsed = microtime(true) - $startTime;
+        $output->writeln(
+            sprintf('Time elapsed: %.3f s', $timeElapsed)
+        );
+        $output->writeln(
+            sprintf('Memory usage: %.3f Mb', memory_get_peak_usage() / 2**20)
+        );
     }
-} 
+}

@@ -1,4 +1,8 @@
 Levi9\HighLoadBundle\Entity\Student:
+    Student0:
+        name: John Smitt
+        description: Lorem ipsum dolor sit amet
+        path: 'john_smitt'
     Student{1..25000}:
         name: <firstName()> <lastName()>
         description: <text(500)>

@@ -5,13 +5,14 @@ namespace Levi9\HighLoadBundle\Service;
 use Doctrine\ORM\EntityManager;
 use Levi9\HighLoadBundle\Entity\Student;
 
-class StudentService {
-    const BATCH_SIZE = 25;
+class StudentService
+{
+    const BATCH_SIZE = 50;
 
     /** @var EntityManager */
     private $em;
 
-    private $cache = array();
+    private $cache = [];
 
     public function __construct(EntityManager $entityManager)
     {
@@ -60,4 +61,4 @@ class StudentService {
         $this->cache[$path] = true;
         return $path;
     }
-} 
+}
