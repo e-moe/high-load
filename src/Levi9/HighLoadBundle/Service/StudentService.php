@@ -7,39 +7,7 @@ use Levi9\HighLoadBundle\Entity\Student;
 
 class StudentService
 {
-    const BATCH_SIZE = 50;
-
-    /** @var EntityManager */
-    private $em;
-
     private $cache = [];
-
-    public function __construct(EntityManager $entityManager)
-    {
-        $this->em = $entityManager;
-    }
-
-    public function generatePath()
-    {
-        $this->em->getConnection()->getConfiguration()->setSQLLogger(null);
-        // see http://doctrine-orm.readthedocs.org/en/latest/reference/batch-processing.html#iterating-results
-        $i = 0;
-        $q = $this->em->createQuery('select s from Levi9\HighLoadBundle\Entity\Student s');
-        $iterableResult = $q->iterate();
-        foreach ($iterableResult as $row) {
-            /** @var Student $student */
-            $student = $row[0];
-            $path = $this->getUniquePath($student->getName());
-            $student->setPath($path);
-            if (($i % self::BATCH_SIZE) === 0) {
-                $this->em->flush(); // Executes all updates.
-                $this->em->clear(); // Detaches all objects from Doctrine!
-                gc_collect_cycles();
-            }
-            ++$i;
-        }
-        $this->em->flush();
-    }
 
     public function encodeString($subject)
     {
