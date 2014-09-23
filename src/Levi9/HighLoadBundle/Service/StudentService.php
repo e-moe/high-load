@@ -22,7 +22,7 @@ class StudentService
     public function generatePath()
     {
         $this->em->getConnection()->getConfiguration()->setSQLLogger(null);
-
+        // see http://doctrine-orm.readthedocs.org/en/latest/reference/batch-processing.html#iterating-results
         $i = 0;
         $q = $this->em->createQuery('select s from Levi9\HighLoadBundle\Entity\Student s');
         $iterableResult = $q->iterate();

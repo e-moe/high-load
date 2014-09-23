@@ -12,7 +12,7 @@ class DefaultController extends Controller
 {
     /**
      * @Route("/show/{path}", name="")
-     * @Cache(expires="15 minutes", public=true)
+     * @Cache(maxage="900", public=true)
      * @param Student $student
      * @return Response
      */
