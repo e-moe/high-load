@@ -44,7 +44,9 @@ class StudentService
     public function encodeString($subject)
     {
         $sanitized = preg_replace('/\W/u', '_', $subject);
-        return mb_strtolower($sanitized);
+        $lower = mb_strtolower($sanitized);
+        $trimmed = trim($lower, '_');
+        return preg_replace('/_{2,}/u', '_', $trimmed);
     }
 
     public function getUniquePath($path)

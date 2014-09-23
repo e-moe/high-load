@@ -1,5 +1,5 @@
 levi9_high_load:
-    resource: "@Levi9HighLoadBundle"
+    resource: "@Levi9HighLoadBundle/Controller"
     prefix:   /
     type:     annotation
 
