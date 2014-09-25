@@ -19,6 +19,12 @@ class StudentCommand extends ContainerAwareCommand
         ;
     }
 
+    /**
+     * Generate unique path for all students
+     *
+     * Here we are using Doctrine Iterator, see:
+     * @link http://doctrine-orm.readthedocs.org/en/latest/reference/batch-processing.html#iterating-results
+     */
     protected function generatePath()
     {
         /** @var StudentService $studentService */
@@ -26,14 +32,10 @@ class StudentCommand extends ContainerAwareCommand
 
         $em =$this->getContainer()->get('doctrine.orm.entity_manager');
         $em->getConnection()->getConfiguration()->setSQLLogger(null);
-
-        // see http://doctrine-orm.readthedocs.org/en/latest/reference/batch-processing.html#iterating-results
+        $studentsIterator = $em->getRepository('Levi9HighLoadBundle:Student')->getStudentsIterator();
         $i = 0;
-        $q = $em->createQuery('select s from Levi9\HighLoadBundle\Entity\Student s');
-        $iterableResult = $q->iterate();
-        foreach ($iterableResult as $row) {
+        foreach ($studentsIterator as list($student)) {
             /** @var Student $student */
-            $student = $row[0];
             $path = $studentService->getUniquePath($student->getName());
             $student->setPath($path);
             if (($i % self::BATCH_SIZE) === 0) {
