@@ -13,3 +13,7 @@ How to test:
 3. ./bin/phpunit -c app/
 
 4. ./bin/phpcs --standard=PSR2 src/
+
+---
+
+[![Build Status](https://travis-ci.org/e-moe/high-load.svg)](https://travis-ci.org/e-moe/high-load)
