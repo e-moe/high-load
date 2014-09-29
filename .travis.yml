@@ -4,8 +4,8 @@ php:
 install:
   - composer install
   - php app/console doctrine:database:create
-  - php app/console doctrine:migrations:migrate
-  - php app/console doctrine:fixtures:load
+  - yes | php app/console doctrine:migrations:migrate
+  - yes | php app/console doctrine:fixtures:load
   - php app/console student:generate:path
 script:
   - ./bin/phpunit -c app/
